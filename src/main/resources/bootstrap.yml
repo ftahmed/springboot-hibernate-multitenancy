@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: resttemplate-troubleshooting-svc-1
