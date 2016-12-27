@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.asimio.demo.api</groupId>
-	<artifactId>springboot-multitenancy</artifactId>
+	<artifactId>springboot-hibernate-multitenancy</artifactId>
 	<version>0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>springboot-multitenancy</name>
-	<description>Spring Boot multi-tenant application</description>
+	<name>springboot-hibernate-multitenancy</name>
+	<description>Multi-tenant application using Spring Boot, Hibernate and Postgres</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
