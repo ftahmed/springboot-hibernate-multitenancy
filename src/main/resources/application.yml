@@ -24,23 +24,23 @@ info:
 spring:
   jpa:
     database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: false
     hibernate:
       ddl-auto: none
-      dialect: org.hibernate.dialect.PostgreSQLDialect
 
 multitenancy:
   dvdrental:
     dataSources:
       -
         tenantId: tenant_1
-        url: jdbc:postgresql://localhost:5432/dvdrental1
-        username: user
-        password: pass
+        url: jdbc:postgresql://localhost:5432/db_dvdrental
+        username: user_dvdrental
+        password: changeit
         driverClassName: org.postgresql.Driver
-      -
-        tenantId: tenant_2
-        url: jdbc:postgresql://localhost:5432/dvdrental2
-        username: user
-        password: pass
-        driverClassName: org.postgresql.Driver
+#      -
+#        tenantId: tenant_2
+#        url: jdbc:postgresql://localhost:5532/db_dvdrental
+#        username: user_dvdrental
+#        password: changeit
+#        driverClassName: org.postgresql.Driver

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.hibernate.MultiTenancyStrategy;
@@ -16,8 +17,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.asimio.dvdrental.model.Actor;
 
@@ -35,8 +38,8 @@ public class MultiTenantJpaConfiguration {
 	private CurrentTenantIdentifierResolver currentTenantIdentifierResolver;
 
 	@Bean
-	public List<LocalContainerEntityManagerFactoryBean> entityManagersFactory(Map<String, DataSource> dataSourcesDvdRental) {
-		List<LocalContainerEntityManagerFactoryBean> result = new ArrayList<>();
+	public List<EntityManagerFactory> entityManagersFactory(Map<String, DataSource> dataSourcesDvdRental) {
+		List<EntityManagerFactory> result = new ArrayList<>();
 		for (Map.Entry<String, DataSource> entry : dataSourcesDvdRental.entrySet()) {
 			Map<String, Object> hibernateProps = new LinkedHashMap<>();
 			hibernateProps.putAll(this.jpaProperties.getHibernateProperties(entry.getValue()));
@@ -44,12 +47,25 @@ public class MultiTenantJpaConfiguration {
 			hibernateProps.put(Environment.MULTI_TENANT_CONNECTION_PROVIDER, this.multiTenantConnectionProvider);
 			hibernateProps.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER, this.currentTenantIdentifierResolver);
 
-			LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
-			entityManager.setDataSource(entry.getValue());
-			entityManager.setPackagesToScan(new String[] { Actor.class.getPackage().getName() });
-			entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-			entityManager.setJpaPropertyMap(hibernateProps);
-			result.add(entityManager);
+			LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+			entityManagerFactory.setDataSource(entry.getValue());
+			entityManagerFactory.setPersistenceUnitName(entry.getKey());
+			entityManagerFactory.setPackagesToScan(new String[] { Actor.class.getPackage().getName() });
+			entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+			entityManagerFactory.setJpaPropertyMap(hibernateProps);
+			entityManagerFactory.afterPropertiesSet();
+			result.add(entityManagerFactory.getObject());
+		}
+		return result;
+	}
+
+	@Bean
+	public List<PlatformTransactionManager> transactionManagers(List<EntityManagerFactory> entityManagersFactory) {
+		List<PlatformTransactionManager> result = new ArrayList<>();
+		for (EntityManagerFactory entityManagerFactory : entityManagersFactory) {
+			PlatformTransactionManager txManager = new JpaTransactionManager(entityManagerFactory);
+			result.add(txManager);
+			
 		}
 		return result;
 	}
