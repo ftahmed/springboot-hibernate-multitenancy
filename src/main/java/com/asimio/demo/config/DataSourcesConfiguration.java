@@ -5,26 +5,20 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.asimio.demo.config.dvdrental.MultitenancyDvdRentalProperties;
-import com.asimio.demo.config.dvdrental.MultitenancyDvdRentalProperties.DataSourceProperties;
+import com.asimio.demo.config.dvdrental.MultiTenantDvdRentalProperties;
+import com.asimio.demo.config.dvdrental.MultiTenantDvdRentalProperties.DataSourceProperties;
 
 @Configuration
 public class DataSourcesConfiguration {
 
-	@Autowired
-	private MultitenancyDvdRentalProperties multitenancyDvdRentalProperties;
-
 	@Bean(name = "dataSourcesDvdRental" )
-	@ConfigurationProperties(prefix = "multitenancy.dvdrental")
-	public Map<String, DataSource> dataSourcesDvdRental() {
+	public Map<String, DataSource> dataSourcesDvdRental(MultiTenantDvdRentalProperties multiTenantDvdRentalProperties) {
 		Map<String, DataSource> result = new HashMap<>();
-		for (DataSourceProperties dsProperties : this.multitenancyDvdRentalProperties.getDataSources()) {
+		for (DataSourceProperties dsProperties : multiTenantDvdRentalProperties.getDataSources()) {
 			DataSourceBuilder factory = DataSourceBuilder
 				.create()
 				.url(dsProperties.getUrl())

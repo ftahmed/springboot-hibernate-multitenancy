@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.asimio.demo.config.dvdrental.MultitenancyDvdRentalProperties;
+import com.asimio.demo.config.dvdrental.MultiTenantDvdRentalProperties;
 
 @SpringBootApplication(
 	exclude = { DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class }, 
@@ -16,7 +16,7 @@ import com.asimio.demo.config.dvdrental.MultitenancyDvdRentalProperties;
 )
 @EntityScan(basePackages = { "com.asimio.dvdrentals.model" })
 // @EnableJpaRepositories(basePackages = { "com.asimio.dvdrentals.dao" })
-@EnableConfigurationProperties(MultitenancyDvdRentalProperties.class)
+@EnableConfigurationProperties(MultiTenantDvdRentalProperties.class)
 public class Application {
 
 	public static void main(String[] args) {

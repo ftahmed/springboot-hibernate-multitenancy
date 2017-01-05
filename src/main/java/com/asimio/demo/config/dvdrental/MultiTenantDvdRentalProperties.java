@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "multitenancy.dvdrental")
-public class MultitenancyDvdRentalProperties {
+public class MultiTenantDvdRentalProperties {
 
 	private List<DataSourceProperties> dataSources;
 
@@ -30,6 +30,5 @@ public class MultitenancyDvdRentalProperties {
 		public void setTenantId(String tenantId) {
 			this.tenantId = tenantId;
 		}
-
 	}
 }

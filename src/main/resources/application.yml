@@ -21,6 +21,14 @@ info:
   build:
     version: @project.version@
 
+spring:
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
 multitenancy:
   dvdrental:
     dataSources:
