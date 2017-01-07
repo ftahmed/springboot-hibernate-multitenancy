@@ -29,18 +29,22 @@ spring:
     hibernate:
       ddl-auto: none
 
+# Bring Postgres docker images using: 
+# docker run -d -p 5532:5432 -e DB_NAME=db_dvdrental -e DB_USER=user_dvdrental -e DB_PASSWD=changeit asimio/db_dvdrental:latest
+# 172.16.69.133 = Fusion VM Docker host, 5532 Docker host port mapped to container port
+
 multitenancy:
   dvdrental:
     dataSources:
       -
         tenantId: tenant_1
-        url: jdbc:postgresql://localhost:5432/db_dvdrental
+        url: jdbc:postgresql://172.16.69.133:5432/db_dvdrental
         username: user_dvdrental
         password: changeit
         driverClassName: org.postgresql.Driver
-#      -
-#        tenantId: tenant_2
-#        url: jdbc:postgresql://localhost:5532/db_dvdrental
-#        username: user_dvdrental
-#        password: changeit
-#        driverClassName: org.postgresql.Driver
+      -
+        tenantId: tenant_2
+        url: jdbc:postgresql://172.16.69.133:5532/db_dvdrental
+        username: user_dvdrental
+        password: changeit
+        driverClassName: org.postgresql.Driver

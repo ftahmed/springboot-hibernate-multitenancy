@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "multitenancy.dvdrental")
 public class MultiTenantDvdRentalProperties {
 
-	private List<DataSourceProperties> dataSources;
+	private List<DataSourceProperties> dataSourcesProps;
 
 	public List<DataSourceProperties> getDataSources() {
-		return this.dataSources;
+		return this.dataSourcesProps;
 	}
 
-	public void setDataSources(List<DataSourceProperties> dataSources) {
-		this.dataSources = dataSources;
+	public void setDataSources(List<DataSourceProperties> dataSourcesProps) {
+		this.dataSourcesProps = dataSourcesProps;
 	}
 
 	public static class DataSourceProperties extends org.springframework.boot.autoconfigure.jdbc.DataSourceProperties {
