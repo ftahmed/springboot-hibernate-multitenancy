@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.asimio.demo.config.dvdrental.DvdRentalTenantContextHolder;
+import com.asimio.demo.config.dvdrental.DvdRentalTenantContext;
 
 public class DvdRentalMultiTenantInterceptor extends HandlerInterceptorAdapter {
 
@@ -15,12 +15,12 @@ public class DvdRentalMultiTenantInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String tenantId = request.getHeader(TENANT_HEADER_NAME);
-		DvdRentalTenantContextHolder.setTenantId(tenantId);
+		DvdRentalTenantContext.setTenantId(tenantId);
 		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		DvdRentalTenantContextHolder.setTenantId(null);
+		DvdRentalTenantContext.setTenantId(null);
 	}
 }

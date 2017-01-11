@@ -10,7 +10,7 @@ public class TenantDvdRentalIdentifierResolverImpl implements CurrentTenantIdent
 
 	@Override
 	public String resolveCurrentTenantIdentifier() {
-		String currentTenantId = DvdRentalTenantContextHolder.getTenantId();
+		String currentTenantId = DvdRentalTenantContext.getTenantId();
 		return (currentTenantId != null) ? currentTenantId : DEFAULT_TENANT_ID;
 	}
 

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.asimio.demo.config.dvdrental.DvdRentalTenantContextHolder;
+import com.asimio.demo.config.dvdrental.DvdRentalTenantContext;
 import com.asimio.demo.main.Application;
 import com.asimio.dvdrental.dao.ActorDao;
 import com.asimio.dvdrental.model.Actor;
@@ -23,7 +23,7 @@ public class ActorDaoIT {
 
 	@BeforeClass
 	public static void beforeClass() {
-		DvdRentalTenantContextHolder.setTenantId("tenant_1");
+		DvdRentalTenantContext.setTenantId("tenant_1");
 	}
 
 	@Test

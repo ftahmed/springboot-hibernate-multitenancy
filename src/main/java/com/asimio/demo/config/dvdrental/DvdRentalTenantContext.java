@@ -1,6 +1,6 @@
 package com.asimio.demo.config.dvdrental;
 
-public class DvdRentalTenantContextHolder {
+public class DvdRentalTenantContext {
 
 	private static final ThreadLocal<String> CONTEXT = new ThreadLocal<>();
 
