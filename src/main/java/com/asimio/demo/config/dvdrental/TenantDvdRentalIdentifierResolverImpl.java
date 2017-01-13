@@ -1,9 +1,7 @@
 package com.asimio.demo.config.dvdrental;
 
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
-import org.springframework.stereotype.Component;
 
-@Component
 public class TenantDvdRentalIdentifierResolverImpl implements CurrentTenantIdentifierResolver {
 
 	private static String DEFAULT_TENANT_ID = "tenant_1";
