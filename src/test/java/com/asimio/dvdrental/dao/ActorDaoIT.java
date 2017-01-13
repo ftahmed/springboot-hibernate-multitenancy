@@ -1,4 +1,4 @@
-package com.asimio.demo.dvdrental.dao;
+package com.asimio.dvdrental.dao;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
