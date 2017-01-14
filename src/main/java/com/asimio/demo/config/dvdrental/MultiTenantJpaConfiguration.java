@@ -37,10 +37,13 @@ public class MultiTenantJpaConfiguration {
 	@Autowired
 	private JpaProperties jpaProperties;
 
+	@Autowired
+	private MultiTenantDvdRentalProperties multiTenantDvdRentalProperties;
+
 	@Bean(name = "dataSourcesDvdRental" )
-	public Map<String, DataSource> dataSourcesDvdRental(MultiTenantDvdRentalProperties multiTenantDvdRentalProperties) {
+	public Map<String, DataSource> dataSourcesDvdRental() {
 		Map<String, DataSource> result = new HashMap<>();
-		for (DataSourceProperties dsProperties : multiTenantDvdRentalProperties.getDataSources()) {
+		for (DataSourceProperties dsProperties : this.multiTenantDvdRentalProperties.getDataSources()) {
 			DataSourceBuilder factory = DataSourceBuilder
 				.create()
 				.url(dsProperties.getUrl())
