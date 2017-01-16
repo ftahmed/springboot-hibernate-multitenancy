@@ -58,8 +58,7 @@ public class MultiTenantJpaConfiguration {
 	@Bean
 	public MultiTenantConnectionProvider multiTenantConnectionProvider() {
 		// Autowires dataSourcesDvdRental
-		MultiTenantConnectionProvider result = new DvdRentalDataSourceMultiTenantConnectionProviderImpl();
-		return result;
+		return new DvdRentalDataSourceMultiTenantConnectionProviderImpl();
 	}
 
 	@Bean
