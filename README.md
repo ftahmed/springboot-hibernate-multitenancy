@@ -6,7 +6,7 @@ Spring Boot demo accompanying source code for blog post at [http://tech.asimio.n
 
 * Java 8
 * Maven 3.3.x
-* Postgres server to create a couple of databases or Docker to start a couple of asimio/db_dvdrental Postgres containers.
+* Postgres server to create a couple of databases or Docker host to start a couple of [asimio/db_dvdrental](https://hub.docker.com/r/asimio/db_dvdrental/) Postgres containers.
 
 ### Building the artifact ###
 
